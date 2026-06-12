@@ -20,8 +20,8 @@ export default function HeroSection() {
     >
       {/* ---------------- BACKGROUNDS (REFERENCE IMAGE GRADIENT ONLY) ---------------- */}
       
-      {/* Subtle vignette edges */}
-      <div className="absolute inset-0 shadow-[inset_0_0_150px_rgba(0,0,0,0.95)] z-0 pointer-events-none" />
+      {/* Subtle vignette edges optimized */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.7)_100%)] z-0 pointer-events-none" />
       
       {/* Ambient Red Glow behind the car matching reference */}
       <div className="absolute top-1/2 left-[70%] -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-[radial-gradient(circle_at_center,rgba(110,5,5,0.4)_0%,rgba(20,0,0,0.2)_40%,transparent_70%)] z-0 pointer-events-none" />
@@ -89,7 +89,7 @@ export default function HeroSection() {
 
       {/* ---------------- RIGHT SIDE: REFERENCE CAR PLACEMENT ---------------- */}
       <div className="relative z-10 w-full lg:w-[60%] h-[50vh] lg:h-screen cursor-grab active:cursor-grabbing">
-        <Canvas camera={{ position: [0, 1.5, 6], fov: 40 }}>
+        <Canvas dpr={[1, 1.5]} camera={{ position: [0, 1.5, 6], fov: 40 }}>
           <ambientLight intensity={0.4} />
           <spotLight position={[-10, 10, 10]} intensity={4} penumbra={0.8} angle={0.5} color="#ffffff" />
           <spotLight position={[10, 10, -10]} intensity={3} penumbra={1} color="#ffffff" />
@@ -122,7 +122,7 @@ export default function HeroSection() {
                 scale={15} 
                 blur={3} 
                 far={4} 
-                resolution={1024} 
+                resolution={256} 
                 color="#000000"
               />
             </Float>

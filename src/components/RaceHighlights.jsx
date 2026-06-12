@@ -58,7 +58,7 @@ export default function RaceHighlights() {
             >
               {/* Project Image */}
               <div className="w-full lg:w-3/5 group relative perspective-[1000px]">
-                <div className="absolute -inset-1 bg-gradient-to-r from-f1-red to-transparent opacity-0 group-hover:opacity-30 blur-xl transition duration-500 rounded-xl pointer-events-none" />
+                <div className="absolute -inset-8 bg-[radial-gradient(ellipse_at_center,rgba(225,6,0,0.25)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition duration-500 pointer-events-none" />
                 <motion.div
                   whileHover={{ rotateY: index % 2 === 0 ? 5 : -5, scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -67,6 +67,8 @@ export default function RaceHighlights() {
                   <img
                     src={project.image}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity duration-500 mix-blend-luminosity group-hover:mix-blend-normal"
                   />
                   

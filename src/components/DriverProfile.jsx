@@ -39,8 +39,8 @@ export default function DriverProfile() {
               style={{ y: y1 }}
               className="relative w-[320px] h-[460px] sm:w-[380px] sm:h-[540px] group"
             >
-              {/* Background ambient red glow */}
-              <div className="absolute inset-0 bg-f1-red/20 blur-[80px] rounded-full pointer-events-none z-0" />
+              {/* Background ambient red glow optimized */}
+              <div className="absolute inset-[-100px] bg-[radial-gradient(circle_at_center,rgba(225,6,0,0.15)_0%,transparent_70%)] pointer-events-none z-0" />
 
               <motion.div
                 className="w-full h-full relative z-10 transition-all duration-700 ease-out"
@@ -58,6 +58,8 @@ export default function DriverProfile() {
                   <img
                     src="/driver.jpg"
                     alt="Prajwal Ponarkar - F1 Driver"
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover object-top z-0 transition-transform duration-700 group-hover:scale-105"
                     onError={(e) => {
                       e.target.src = "https://images.unsplash.com/photo-1541336032412-2048a678540d?q=80&w=1000&auto=format&fit=crop";
@@ -79,8 +81,8 @@ export default function DriverProfile() {
                 >
                   {/* Abstract background styling */}
                   <div className="absolute inset-0 opacity-10 bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(255,255,255,0.05)_10px,rgba(255,255,255,0.05)_20px)] pointer-events-none" />
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-f1-red/10 blur-3xl rounded-full pointer-events-none" />
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 blur-3xl rounded-full pointer-events-none" />
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-[radial-gradient(circle_at_top_right,rgba(225,6,0,0.15)_0%,transparent_60%)] pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 w-64 h-64 bg-[radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.05)_0%,transparent_60%)] pointer-events-none" />
 
                   <div className="relative z-10 flex flex-col items-center">
                     <h1 className="font-heading font-black text-7xl text-transparent italic tracking-wider mb-2 drop-shadow-2xl" style={{ WebkitTextStroke: '2px #e10600' }}>
