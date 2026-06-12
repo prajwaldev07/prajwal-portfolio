@@ -29,6 +29,7 @@ export default function ContactFooter() {
   // Form State
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState(null); // 'sending', 'success', 'error'
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleCopy = (e, id, value) => {
     e.preventDefault();
@@ -49,31 +50,44 @@ export default function ContactFooter() {
     if (!formData.name || !formData.email || !formData.subject || !formData.message) return;
     
     setStatus("sending");
+    setErrorMessage("");
+
+    const serviceId = "service_ympff9p";
+    const templateId = "template_pzgeapi";
+    const publicKey = "xW1iZy7c2x7jm7-yO";
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    };
+
+    console.log("=== EmailJS Debugging ===");
+    console.log("Service ID:", serviceId);
+    console.log("Template ID:", templateId);
+    console.log("Template Params:", templateParams);
 
     try {
-      await emailjs.send(
-        "service_ympff9p",
-        "template_zrtcuxo",
-        {
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        },
-        "xW1iZy7c2x7jm7-yO"
+      const response = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
       );
       
+      console.log("EmailJS Success Response:", response);
       setStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
       
       // Reset success message after 5 seconds
       setTimeout(() => setStatus(null), 5000);
     } catch (error) {
-      console.error("EmailJS Error:", error);
+      console.error("EmailJS Full Error Response:", error);
       setStatus("error");
+      setErrorMessage(error?.text || error?.message || "Failed to send message. Please try again.");
       
-      // Reset error message after 5 seconds
-      setTimeout(() => setStatus(null), 5000);
+      // Reset error message after 10 seconds to allow reading
+      setTimeout(() => setStatus(null), 10000);
     }
   };
 
@@ -234,16 +248,16 @@ export default function ContactFooter() {
                   animate={{ opacity: 1, y: 0 }}
                   className="text-green-400 text-sm font-sans font-medium mt-2 flex items-center gap-2"
                 >
-                  ✅ Message sent successfully. I'll get back to you soon.
+                  ✅ Message sent successfully.
                 </motion.p>
               )}
               {status === "error" && (
                 <motion.p 
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-red-400 text-sm font-sans font-medium mt-2 flex items-center gap-2"
+                  className="text-red-400 text-sm font-sans font-medium mt-2 flex items-start gap-2"
                 >
-                  ❌ Failed to send message. Please try again.
+                  <span>❌</span> <span>{errorMessage}</span>
                 </motion.p>
               )}
             </form>
